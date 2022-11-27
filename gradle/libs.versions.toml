@@ -1,0 +1,26 @@
+[versions]
+kotlin = "1.7.10"
+spring-boot = "2.7.1"
+spring-aot = "0.12.1"
+
+kotlin-logging = "3.0.4"
+
+[libraries]
+
+# buildSrc dependencies (necessary to import plugins)
+kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+kotlin-allopen = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
+kotlin-noarg = { module = "org.jetbrains.kotlin:kotlin-noarg", version.ref = "kotlin" }
+kotlin-spring = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
+spring-boot-gradle = { module = "org.springframework.boot:spring-boot-gradle-plugin", version.ref = "spring-boot" }
+spring-aot = { module = "org.springframework.experimental:spring-aot-gradle-plugin", version.ref = "spring-aot" }
+
+# project dev dependencies
+kotlin-logging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlin-logging" }
+
+# project test dependencies
+
+[bundles]
+build-src = ["kotlin-gradle", "kotlin-serialization", "kotlin-allopen", "kotlin-noarg", "kotlin-spring", "spring-boot-gradle", "spring-aot"]
+kotlinLogging = ["kotlin-logging"]
