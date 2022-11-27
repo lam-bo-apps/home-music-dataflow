@@ -3,7 +3,10 @@ plugins {
 }
 
 dependencies {
+    api(project(":domain"))
+    api(project(":driven"))
     implementation(project(":driving"))
+
     implementation("org.springframework.boot:spring-boot-starter-batch")
     runtimeOnly("org.hsqldb:hsqldb")
 
