@@ -1,13 +1,25 @@
-# Home media dataflow (WIP)
+# Home music dataflow (WIP)
 
 Contains Spring Batch tasks compiled in native mode with GraalVM, following a DDD code architecture.
 These tasks are used to backup Spotify library data to Firebase Datastore and synchronize liked tracks to Youtube
 
-## Installation
+## Requirements
 
-Install GraalVM Java 17 with sdkman
+Install GraalVM Java 17 with sdkman, then install native-image with gu
 
+```
 sdk install java 22.3.r17-grl
+gu install native-image
+```
+
+## Steps for jvm
+
+TODO
+
+## Steps for native
+
+- Build using `./gradlew :import-library-spotify-task:nativeCompile`
+- Run using `./import-library-spotify-task/build/native/nativeCompile/import-library-spotify-task`
 
 ## References
 

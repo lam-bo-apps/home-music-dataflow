@@ -16,7 +16,8 @@ tasks.withType<BootBuildImage> {
     environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
 }
 
+/* Uncomment to start the app in native mode when executing 'gradle bootRun'
 tasks.getByName<BootRun>("bootRun") {
     systemProperty("springAot", "true")
 }
-
+*/
