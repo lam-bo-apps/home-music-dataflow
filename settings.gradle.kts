@@ -18,4 +18,4 @@ rootProject.name = "home-music-dataflow"
 include(":domain")
 include(":driven")
 include(":driving")
-include(":import-library-spotify-task")
+include(":log-spotify-user-top-tracks-task")

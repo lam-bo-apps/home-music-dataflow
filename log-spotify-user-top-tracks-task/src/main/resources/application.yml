@@ -1,0 +1,8 @@
+spotify-api:
+  user-token: ${SPOTIFY_USER_TOKEN}
+  user-token-type: ${SPOTIFY_USER_TOKEN_TYPE:ACCESS}
+  client-id: ${SPOTIFY_CLIENT_ID}
+  client-secret: ${SPOTIFY_CLIENT_SECRET}
+
+task:
+  chunk-size: 10
