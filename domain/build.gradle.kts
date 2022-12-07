@@ -1,8 +1,6 @@
 plugins {
-    id("com.lamboapps.convention.kotlin")
+    id("com.lamboapps.convention.kotlin-spring-native")
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 }

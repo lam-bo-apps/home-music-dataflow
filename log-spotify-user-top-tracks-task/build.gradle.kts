@@ -8,8 +8,7 @@ dependencies {
     implementation(project(":driving"))
 
     implementation("org.springframework.boot:spring-boot-starter-batch")
-    runtimeOnly("org.hsqldb:hsqldb")
+    runtimeOnly("com.h2database:h2")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.batch:spring-batch-test")
 }
