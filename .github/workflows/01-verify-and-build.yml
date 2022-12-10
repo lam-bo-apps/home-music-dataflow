@@ -1,0 +1,24 @@
+name: Build docker image and  in jvm mode
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+jobs:
+  verify-and-build:
+    name: Verify code and push container images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: '22.3.0'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+
+      - name: Build native image
+        run: |
+          ./gradlew bootBuildImage
