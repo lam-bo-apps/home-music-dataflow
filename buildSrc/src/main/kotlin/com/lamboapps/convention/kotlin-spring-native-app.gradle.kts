@@ -11,7 +11,7 @@ plugins {
 tasks.withType<BootBuildImage> {
     if(this.isEnabled) {
         /** Values provided during Github actions workflow **/
-        val isRegistryPublish = (project.properties.getOrDefault("dataflowRegistry.isPublish", "false") as String)
+        val isRegistryPublish = (project.properties.getOrDefault("registry.isPublish", "false") as String)
                 .let { it.toBoolean() }
         val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
         val registryImagePath = project.properties.get("registry.imagePath") as String?
