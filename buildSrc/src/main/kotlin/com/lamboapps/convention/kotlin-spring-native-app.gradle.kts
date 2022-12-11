@@ -27,11 +27,13 @@ tasks.withType<BootBuildImage> {
     imageName = fullImageName
     tags = listOf("latest")
     isPublish = isRegistryPublish
-    docker {
-        publishRegistry {
-            url = registryBaseUrl
-            username = registryUsername
-            password = registryPassword
+    if(isRegistryPublish) {
+        docker {
+            publishRegistry {
+                url = registryBaseUrl
+                username = registryUsername
+                password = registryPassword
+            }
         }
     }
 }
