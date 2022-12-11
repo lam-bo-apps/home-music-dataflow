@@ -9,17 +9,18 @@ plugins {
 }
 
 /**
- * Values provided during Github actions, but can be override in gradle.properties for local dev
+ * Values provided during Github actions workflow
  */
 val isRegistryPublish = (project.properties.getOrDefault("dataflowRegistry.isPublish", "false") as String)
         .let { it.toBoolean() }
-val registryBaseUrl = project.properties.get("dataflowRegistry.baseUrl") as String?
-val registryName = project.properties.get("dataflowRegistry.name") as String?
-val registryUsername = project.properties.get("dataflowRegistry.username") as String?
-val registryPassword = project.properties.get("dataflowRegistry.password") as String?
-val gcloudProjectId = project.properties.get("gcloud.projectId") as String?
+val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
+val registryImagePath = project.properties.get("registry.imagePath") as String?
+val registryUsername = project.properties.get("registry.username") as String?
+val registryPassword = project.properties.get("registry.password") as String?
 
-val fullImageName = listOf(registryBaseUrl, gcloudProjectId, registryName, project.name).joinToString("/")
+val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
+        .filterNotNull()
+        .joinToString("/")
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"
