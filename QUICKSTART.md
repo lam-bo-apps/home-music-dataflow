@@ -43,3 +43,16 @@ export SPOTIFY_USER_TOKEN=changeMe
 ./log-spotify-user-top-tracks-task/build/native/nativeCompile/log-spotify-user-top-tracks-task
 ```
 
+### Steps for native container image run
+
+With docker running, build container image using
+`./gradlew :log-spotify-user-top-tracks-task:bootBuildImage`
+
+Run using
+
+```
+export SPOTIFY_USER_TOKEN=changeMe
+docker run -e "SPOTIFY_USER_TOKEN=${SPOTIFY_USER_TOKEN}" docker.io/home-music/log-spotify-user-top-tracks-task:latest
+```
+
+

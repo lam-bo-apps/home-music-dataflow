@@ -7,3 +7,4 @@
 - Github example of multi module project with buildSrc https://github.com/mrclrchtr/gradle-kotlin-spring
 - Github example of Spring
   task https://github.com/spring-projects-experimental/spring-native/tree/main/samples/cloud-task
+- Good project example with devcontainer setup https://github.com/elide-dev/v3

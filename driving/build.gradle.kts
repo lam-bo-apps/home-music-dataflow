@@ -1,5 +1,5 @@
 plugins {
-    id("com.lamboapps.convention.kotlin-spring")
+    id("com.lamboapps.convention.kotlin-spring-native-lib")
 }
 
 dependencies {
