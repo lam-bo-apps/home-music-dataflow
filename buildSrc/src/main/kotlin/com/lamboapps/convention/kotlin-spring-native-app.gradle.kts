@@ -18,12 +18,12 @@ val registryPassword = project.properties.get("registry.password") as String?
 val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
         .filterNotNull()
         .joinToString("/")
+        .plus(":latest")
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"
     environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
     imageName = fullImageName
-    tags = listOf("latest")
     isPublish = isRegistryPublish
     docker {
         publishRegistry {
