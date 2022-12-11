@@ -41,9 +41,9 @@ jobs:
       - name: Build native image
         run: |
           ./gradlew bootBuildImage \
-          -Pregistry.isPublish=true \
-          -Pregistry.baseUrl= ${{ env.DATAFLOW_REGISTRY_BASE_URL }} \
-          -Pregistry.registryName= ${{ env.DATAFLOW_REGISTRY_NAME }}
-          -Pregistry.username=oauth2accesstoken \
-          -Pregistry.password=${{ env.auth.outputs.access_token }} \
+          -PdataflowRegistry.isPublish=true \
+          -PdataflowRegistry.baseUrl= ${{ env.DATAFLOW_REGISTRY_BASE_URL }} \
+          -PdataflowRegistry.registryName= ${{ env.DATAFLOW_REGISTRY_NAME }}
+          -PdataflowRegistry.username=oauth2accesstoken \
+          -PdataflowRegistry.password=${{ env.auth.outputs.access_token }} \
           -Pgcloud.ProjectId= $ {{ env.GCLOUD_PROJECT_ID }}
