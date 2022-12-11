@@ -15,8 +15,7 @@ val isRegistryPublish = (project.properties.getOrDefault("dataflowRegistry.isPub
         .let { it.toBoolean() }
 val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
 val registryImagePath = project.properties.get("registry.imagePath") as String?
-val registryUsername = project.properties.get("registry.username") as String?
-val registryPassword = project.properties.get("registry.password") as String?
+val registryToken = project.properties.get("registry.token") as String?
 
 val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
         .filterNotNull()
@@ -32,8 +31,7 @@ tasks.withType<BootBuildImage> {
         docker {
             publishRegistry {
                 url = registryBaseUrl
-                username = registryUsername
-                password = registryPassword
+                token = registryToken
             }
         }
     }
