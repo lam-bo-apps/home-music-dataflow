@@ -27,6 +27,9 @@ gitVersioning.apply {
         branch("main") {
             additionalTags = listOf("main")
         }
+        tag("snapshot") {
+            additionalTags = listOf("snapshot")
+        }
     }
     rev {
         additionalTags = emptyList()
