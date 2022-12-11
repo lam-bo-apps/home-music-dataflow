@@ -28,10 +28,6 @@ jobs:
           workload_identity_provider: ${{ env.DATAFLOW_GITHUB_IDENTITY_PROVIDER }}
           service_account: ${{ env.DATAFLOW_GITHUB_SERVICE_ACCOUNT }}
 
-      - name: Print token
-        run: |
-          echo "Token: ${{ steps.auth.outputs.access_token }}"
-
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
