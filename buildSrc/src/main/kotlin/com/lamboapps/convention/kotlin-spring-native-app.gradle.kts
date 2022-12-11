@@ -8,12 +8,13 @@ plugins {
     id("org.springframework.experimental.aot") // Includes Spring Native
 }
 
-/** Values provided during Github actions buil workflow **/
+/** Values provided during Github actions build workflow **/
 val isRegistryPublish = (project.properties.getOrDefault("registry.isPublish", "false") as String)
         .let { it.toBoolean() }
 val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
 val registryImagePath = project.properties.get("registry.imagePath") as String?
-val registryToken = project.properties.get("registry.token") as String?
+val registryUsername = project.properties.get("registry.username") as String?
+val registryPassword = project.properties.get("registry.password") as String?
 val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
         .filterNotNull()
         .joinToString("/")
@@ -27,7 +28,8 @@ tasks.withType<BootBuildImage> {
     docker {
         publishRegistry {
             url = registryBaseUrl
-            token = registryToken
+            username = registryUsername
+            password = registryPassword
         }
     }
 }
@@ -38,5 +40,3 @@ tasks.withType<BootBuildImage> {
 tasks.getByName<BootRun>("bootRun") {
     systemProperty("springAot", false)
 }
-
-
