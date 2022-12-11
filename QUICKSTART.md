@@ -52,7 +52,7 @@ Run using
 
 ```
 export SPOTIFY_USER_TOKEN=changeMe
-docker run -e "SPOTIFY_USER_TOKEN=${SPOTIFY_USER_TOKEN}" europe-west9-docker.pkg.dev/lam-bo-home/artifact-registry/log-spotify-user-top-tracks-task:latest
+docker run -e "SPOTIFY_USER_TOKEN=${SPOTIFY_USER_TOKEN}" docker.io/home-music/log-spotify-user-top-tracks-task:latest
 ```
 
 

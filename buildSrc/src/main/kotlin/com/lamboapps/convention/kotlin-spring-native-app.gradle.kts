@@ -12,41 +12,39 @@ plugins {
 /** Values provided during Github actions build workflow **/
 val isRegistryPublish = (project.properties.getOrDefault("registry.isPublish", "false") as String)
         .let { it.toBoolean() }
-val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
-val registryImagePath = project.properties.get("registry.imagePath") as String?
+val registryBaseUrl = project.properties.getOrDefault("registry.baseUrl", "docker.io") as String
+val registryImagePath = project.properties.getOrDefault("registry.imagePath", "home-music") as String
 val registryUsername = project.properties.get("registry.username") as String?
 val registryPassword = project.properties.get("registry.password") as String?
 val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
         .filterNotNull()
         .joinToString("/")
-        .plus(":latest")
 
-lateinit var additionalTags: List<String>
+var additionalTags = mutableListOf<String>()
 gitVersioning.apply {
     refs {
         branch("main") {
-            additionalTags = listOf("main")
+            additionalTags.add(fullImageName.plus(":main"))
         }
         tag("snapshot") {
-            additionalTags = listOf("snapshot")
+            additionalTags.add(fullImageName.plus(":snapshot"))
         }
     }
-    rev {
-        additionalTags = emptyList()
-    }
 }
-
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"
     environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
-    imageName = fullImageName
+    imageName = fullImageName.plus(":latest")
+    tags = additionalTags
     isPublish = isRegistryPublish
-    docker {
-        publishRegistry {
-            url = registryBaseUrl
-            username = registryUsername
-            password = registryPassword
+    if(isPublish) {
+        docker {
+            publishRegistry {
+                url = registryBaseUrl
+                username = registryUsername
+                password = registryPassword
+            }
         }
     }
 }
