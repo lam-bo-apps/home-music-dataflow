@@ -30,7 +30,7 @@ jobs:
 
       - name: Print token
         run: |
-          echo "Token: ${{ env.auth.outputs.access_token }}"
+          echo "Token: ${{ steps.auth.outputs.access_token }}"
 
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
@@ -48,4 +48,4 @@ jobs:
           -Pregistry.baseUrl= ${{ env.DATAFLOW_REGISTRY_BASE_URL }} \
           -Pregistry.imagePath= ${{ env.DATAFLOW_REGISTRY_IMAGE_PATH }}
           -Pregistry.username=oauth2accesstoken \
-          -Pregistry.password=${{ env.auth.outputs.access_token }}
+          -Pregistry.password=${{ steps.auth.outputs.access_token }}
