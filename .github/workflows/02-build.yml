@@ -37,7 +37,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           native-image-job-reports: 'true'
 
-      - name: Build native image
+      - name: Build and push native images to Artifact Registry
         run: |
           ./gradlew clean bootBuildImage \
           -Pregistry.isPublish=true \
