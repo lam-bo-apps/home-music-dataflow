@@ -8,26 +8,23 @@ plugins {
     id("org.springframework.experimental.aot") // Includes Spring Native
 }
 
-/**
- * Values provided during Github actions workflow
- */
-val isRegistryPublish = (project.properties.getOrDefault("dataflowRegistry.isPublish", "false") as String)
-        .let { it.toBoolean() }
-val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
-val registryImagePath = project.properties.get("registry.imagePath") as String?
-val registryToken = project.properties.get("registry.token") as String?
-
-val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
-        .filterNotNull()
-        .joinToString("/")
-
 tasks.withType<BootBuildImage> {
-    builder = "paketobuildpacks/builder:tiny"
-    environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
-    imageName = fullImageName
-    tags = listOf("latest")
-    isPublish = isRegistryPublish
-    if(isRegistryPublish) {
+    if(this.isEnabled) {
+        /** Values provided during Github actions workflow **/
+        val isRegistryPublish = (project.properties.getOrDefault("dataflowRegistry.isPublish", "false") as String)
+                .let { it.toBoolean() }
+        val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
+        val registryImagePath = project.properties.get("registry.imagePath") as String?
+        val registryToken = project.properties.get("registry.token") as String?
+        val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
+                .filterNotNull()
+                .joinToString("/")
+
+        builder = "paketobuildpacks/builder:tiny"
+        environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
+        imageName = fullImageName
+        tags = listOf("latest")
+        isPublish = isRegistryPublish
         docker {
             publishRegistry {
                 url = registryBaseUrl

@@ -6,7 +6,6 @@ plugins {
     id("com.lamboapps.convention.kotlin-spring-native-app")
 }
 
-tasks.stream()
-        .filter { it.name.startsWith("boot")}
-        .forEach{ it.enabled = false }
-
+tasks.whenTaskAdded {
+    if(this.name.startsWith("boot")) this.enabled = false
+}
