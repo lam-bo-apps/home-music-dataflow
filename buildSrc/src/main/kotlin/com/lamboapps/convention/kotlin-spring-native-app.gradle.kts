@@ -13,22 +13,25 @@ plugins {
  */
 val isRegistryPublish = (project.properties.getOrDefault("registry.isPublish", "false") as String)
         .let { it.toBoolean() }
-val registryUrl = project.properties.get("registry.url") as String?
+val registryBaseUrl = project.properties.get("registry.baseUrl") as String?
+val registryName = project.properties.get("registry.name") as String?
 val registryUsername = project.properties.get("registry.username") as String?
 val registryPassword = project.properties.get("registry.password") as String?
+val gcloudProjectId = project.properties.get("gcloud.projectId") as String?
+
+val fullImageName = listOf(registryBaseUrl, gcloudProjectId, registryName, project.name).joinToString("/")
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"
     environment = mapOf("BP_NATIVE_IMAGE" to "true") // enable native image support
-    imageName = project.name.toString()
+    imageName = fullImageName
     tags = listOf("latest")
     isPublish = isRegistryPublish
     docker {
         publishRegistry {
-            url = registryUrl
+            url = registryBaseUrl
             username = registryUsername
             password = registryPassword
-
         }
     }
 }
