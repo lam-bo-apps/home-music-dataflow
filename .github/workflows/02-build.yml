@@ -39,7 +39,7 @@ jobs:
 
       - name: Build native image
         run: |
-          ./gradlew bootBuildImage \
+          ./gradlew clean bootBuildImage \
           -Pregistry.isPublish=true \
           -Pregistry.baseUrl= ${{ env.DATAFLOW_REGISTRY_BASE_URL }} \
           -Pregistry.imagePath= ${{ env.DATAFLOW_REGISTRY_IMAGE_PATH }}
