@@ -6,6 +6,7 @@ import org.springframework.boot.gradle.tasks.run.BootRun
 plugins {
     id("com.lamboapps.convention.kotlin-spring")
     id("org.springframework.experimental.aot") // Includes Spring Native
+    id("me.qoomon.git-versioning")
 }
 
 /** Values provided during Github actions build workflow **/
@@ -19,6 +20,19 @@ val fullImageName = listOf(registryBaseUrl, registryImagePath, project.name)
         .filterNotNull()
         .joinToString("/")
         .plus(":latest")
+
+lateinit var additionalTags: List<String>
+gitVersioning.apply {
+    refs {
+        branch("main") {
+            additionalTags = listOf("main")
+        }
+    }
+    rev {
+        additionalTags = emptyList()
+    }
+}
+
 
 tasks.withType<BootBuildImage> {
     builder = "paketobuildpacks/builder:tiny"
