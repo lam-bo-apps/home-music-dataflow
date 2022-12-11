@@ -6,3 +6,7 @@ These tasks are used to back up Spotify library data to Firebase Datastore and s
 ## Quickstart
 
 See [QUICKSTART.md](QUICKSTART.md) to launch a simple task to log top tracks for a Spotify User
+
+## Setup Google Cloud with terraform
+
+TODO
