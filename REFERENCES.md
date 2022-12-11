@@ -8,3 +8,7 @@
 - Github example of Spring
   task https://github.com/spring-projects-experimental/spring-native/tree/main/samples/cloud-task
 - Good project example with devcontainer setup https://github.com/elide-dev/v3
+
+https://cloud.google.com/run/docs/execute/jobs-on-schedule
+
+https://cloud.google.com/run/docs/create-jobs

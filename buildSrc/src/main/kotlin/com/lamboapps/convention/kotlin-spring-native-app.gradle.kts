@@ -26,9 +26,6 @@ gitVersioning.apply {
         branch("main") {
             additionalTags.add(fullImageName.plus(":main"))
         }
-        tag("snapshot") {
-            additionalTags.add(fullImageName.plus(":snapshot"))
-        }
     }
 }
 
